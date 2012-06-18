@@ -14,6 +14,7 @@ else {
 	phantom.casperPath = system.args[1];
 	phantom.injectJs(phantom.casperPath + '\\bin\\bootstrap.js');
 	var casper = require('casper').create({
+		// TODO: make these configurable somehow
 		verbose: true,
 		logLevel: "debug",
 		timeout: 30000

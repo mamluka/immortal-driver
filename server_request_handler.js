@@ -16,9 +16,12 @@ immortalServer.serverRequestHandler = function(request, response) {
 		immortalServer.respond(response, {javascriptEnabled:true});
 	}
 	else {
+		if (splitUrl[2] === 'element' || splitUrl === 'elements') {
 		
+		}
 	}
 	
+	// TODO: catch unsupported requests here
 };
 
 immortalServer.respond = function(response, value, status, sessionId) {

@@ -1,8 +1,11 @@
 var immortalServer = immortalServer || {};
 
 immortalServer.sessionCounter = 0;
+immortalServer.activeSessions = immortalServer.activeSessions || [];
 
 immortalServer.sessionManager = function() {
+	
+	this.sessionId = immortalServer.sessionCounter++;
 	
 	this.Capabilities = {
 		browserName: 'phantomjs',
@@ -21,10 +24,6 @@ immortalServer.sessionManager = function() {
 		acceptSslCerts: false,
 		nativeEvents: true,
 		proxy: { proxyType: 'direct' }
-	};
-	
-	this.getCurrentSession = function() {
-		return immortalServer.sessionCounter;
 	};
 	
 };
