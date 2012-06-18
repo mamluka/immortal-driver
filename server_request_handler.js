@@ -19,7 +19,7 @@ immortalServer.serverRequestHandler = function(request, response) {
 		
 	}
 	
-}
+};
 
 immortalServer.respond = function(response, value, status, sessionId) {
 	response.setHeader("Cache", "no-cache");
@@ -35,4 +35,4 @@ immortalServer.respond = function(response, value, status, sessionId) {
 	response.close();
 	
 	casper.echo('response sent => ' + JSON.stringify(returnObject), 'DEBUG');
-}
+};
