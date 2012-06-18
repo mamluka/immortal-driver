@@ -1,12 +1,12 @@
 // You should be invoking phantomjs like this :
-// phantomjs <server_script> <casper_script> <server_port>
+// phantomjs <server_script> <casper_library> <server_port>
 
 var system = require('system');
 
 if (system.args.length !== 3) {
 	console.log('Unable to start ImmortalServer');
 	console.log('Invalid arguments, please pass arguments as follows : ');
-	console.log('phantomjs <server_script> <casper_script> <server_port>');
+	console.log('phantomjs <server_script> <casper_library> <server_port>');
 }
 else {
 	// load casperjs
@@ -15,9 +15,10 @@ else {
 	phantom.injectJs(phantom.casperPath + '\\bin\\bootstrap.js');
 	var casper = require('casper').create({
 		verbose: true,
-		logLevel: "debug"
+		logLevel: "debug",
+		timeout: 30000
 	});
-	casper.log('casper injected', 'info');
+	casper.echo('casper injected', 'INFO');
 	
 	// initializing web server
 	phantom.injectJs("server_request_handler.js");
@@ -28,8 +29,8 @@ else {
 	var serverRunning = server.listen(__serverPort, immortalServer.serverRequestHandler);
 	
 	if (!serverRunning) {
-		casper.log('could not listen on port ' + __sertverPort, 'error');
-		casper.log('closing phantomjs', 'info');
+		casper.echo('could not listen on port ' + __sertverPort, 'ERROR');
+		casper.echo('closing phantomjs', 'INFO');
 		phantom.exit();
 	}
 }

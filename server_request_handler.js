@@ -1,7 +1,7 @@
 var immortalServer = immortalServer || {};
 
 immortalServer.serverRequestHandler = function(request, response) {
-	casper.log('incoming request => ' + JSON.stringify(request), 'debug');
+	casper.echo('incoming request => ' + JSON.stringify(request), 'DEBUG');
 	
 	// parse the request url
 	var requestedUrl = request.url;
@@ -34,5 +34,5 @@ immortalServer.respond = function(response, value, status, sessionId) {
 	response.write(JSON.stringify(returnObject));
 	response.close();
 	
-	casper.log('response sent => ' + JSON.stringify(returnObject), 'debug');
+	casper.echo('response sent => ' + JSON.stringify(returnObject), 'DEBUG');
 }
