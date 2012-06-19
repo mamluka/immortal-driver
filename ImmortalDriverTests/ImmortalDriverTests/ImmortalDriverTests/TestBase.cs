@@ -3,6 +3,15 @@ using OpenQA.Selenium;
 
 namespace ImmortalDriver.ImmortalDriverTests
 {
+	/// <summary>
+	/// This should be used as the base class for all system tests written here.
+	/// It takes care of opening the phantomjs browser and running the immortal-driver in it.
+	/// 
+	/// POST /session - query server's current status
+	/// GET /sessions - create a new session
+	/// GET /session/:sessionId - return list of currently active sessions
+	/// DELETE /session/:sessionId - delete a specific session
+	/// </summary>
 	public abstract class TestBase
 	{
 		public IWebDriver WebDriver;
