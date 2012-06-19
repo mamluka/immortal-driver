@@ -1,17 +1,15 @@
 
 #reharper crap
-# net/src/*[Rr]e[Ss]harper*
-net/src/_[Rr]e[Ss]harper*
-net/src/**/_ReSharper.*
+ImmortalDriverTests/_[Rr]e[Ss]harper*
+/**/_ReSharper.*
 *.[Rr]e[Ss]harper.user
-net/src/Ohio.*.ReSharper
 
 #VS crap
 *.suo
 *.sln.cache
 *.csproj.user
-net/src/**/bin/
-net/src/**/obj/
+ImmortalDriverTests/**/bin/
+ImmortalDriverTests/**/obj/
 out/
 bin/
 obj/
