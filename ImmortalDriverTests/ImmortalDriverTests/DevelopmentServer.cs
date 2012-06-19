@@ -50,7 +50,7 @@ namespace ImmortalDriver
 
 		public void Dispose()
 		{
-			_devServer.Close();
+			_devServer.Kill();
 			_devServer.Dispose();
 		}
 	}
