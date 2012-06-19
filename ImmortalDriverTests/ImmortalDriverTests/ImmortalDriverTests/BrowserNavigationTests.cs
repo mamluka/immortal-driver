@@ -20,8 +20,8 @@ namespace ImmortalDriver.ImmortalDriverTests
 		public void NavigateToUrl_RetrieveCorrectUrl()
 		{
 			const string url = "http://www.google.com";
-			//WebDriver.Navigate().GoToUrl(url);
-			//Assert.That(WebDriver.Url, Is.StringStarting(url));
+			WebDriver.Navigate().GoToUrl(url);
+			Assert.That(WebDriver.Url, Is.StringStarting(url));
 		}
 
 		// POST /session/:sessionId/back - navigates back in the browsers history
