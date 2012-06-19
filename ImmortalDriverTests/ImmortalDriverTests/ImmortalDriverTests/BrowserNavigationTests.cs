@@ -18,45 +18,42 @@ namespace ImmortalDriver.ImmortalDriverTests
 		[Test]
 		public void NavigateToUrl_RetrieveCorrectUrl()
 		{
-			const string url = "http://www.google.com";
-			WebDriver.Navigate().GoToUrl(url);
-			Assert.That(WebDriver.Url, Is.StringStarting(url));
+			WebDriver.Navigate().GoToUrl(TestSiteUrl);
+			Assert.That(WebDriver.Url, Is.StringStarting(TestSiteUrl));
 		}
 
 		// POST /session/:sessionId/back - navigates back in the browsers history
 		[Test]
 		public void NavigateBack_RetrievePreviousPage()
 		{
-			const string firstUrl = "http://www.google.com";
-			const string secondUrl = "http://www.bing.com";
-			WebDriver.Navigate().GoToUrl(firstUrl);
-			WebDriver.Navigate().GoToUrl(secondUrl);
+			WebDriver.Navigate().GoToUrl(TestSiteUrl);
+			WebDriver.Navigate().GoToUrl(TestSiteUrl + "/Home/About");
 			WebDriver.Navigate().Back();
-			Assert.That(WebDriver.Url, Is.StringStarting(firstUrl));
+			Assert.That(WebDriver.Url, Is.StringContaining(TestSiteUrl));
+			Assert.That(WebDriver.Url, Is.Not.Contains("/Home/About"));
 		}
 
 		// POST /session/:sessionId/forward - navigates forward in the browsers history
 		[Test]
 		public void NavigateForward_NavigatesForward()
 		{
-			const string firstUrl = "http://www.google.com";
-			const string secondUrl = "http://www.bing.com";
-			WebDriver.Navigate().GoToUrl(firstUrl);
-			WebDriver.Navigate().GoToUrl(secondUrl);
+			WebDriver.Navigate().GoToUrl(TestSiteUrl);
+			WebDriver.Navigate().GoToUrl(TestSiteUrl + "/Home/About");
 			WebDriver.Navigate().Back();
 			WebDriver.Navigate().Forward();
-			Assert.That(WebDriver.Url, Is.StringStarting(secondUrl));
+			Assert.That(WebDriver.Url, Is.StringContaining("/Home/About"));
 		}
 
 		// POST /session/:sessionId/refresh - refreshes the current page
 		[Test]
 		public void RefreshPage_PageWasRefreshed()
 		{
-			// TODO: not sure this is the best test for refreshing, maybe we can check some kind of timestamp to make sure
-			const string url = "http://www.google.com";
-			WebDriver.Navigate().GoToUrl(url);
+			WebDriver.Navigate().GoToUrl(TestSiteUrl);
+			var currentTime = WebDriver.Title;
 			WebDriver.Navigate().Refresh();
-			Assert.That(WebDriver.Url, Is.StringStarting(url));
+			var newTime = WebDriver.Title;
+			Assert.That(currentTime, Is.Not.EqualTo(newTime),
+				"There was a problem refreshing the page, or your computer is too fast for this test!");
 		}
 	}
 }

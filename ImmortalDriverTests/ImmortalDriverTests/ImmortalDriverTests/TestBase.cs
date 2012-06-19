@@ -10,6 +10,11 @@ namespace ImmortalDriver.ImmortalDriverTests
 		private ImmortalWebDriver _immortalDriver;
 		private DevelopmentServer _devServer;
 
+		public string TestSiteUrl
+		{
+			get { return "http://localhost:" + DevelopmentServer.Port; }
+		}
+
 		[TestFixtureSetUp]
 		public void TestFixtureSetUp()
 		{
