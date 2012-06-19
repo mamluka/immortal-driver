@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Diagnostics;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 
 namespace ImmortalDriver
@@ -15,6 +16,16 @@ namespace ImmortalDriver
 		private IWebDriver _immortalDriver;
 		private ICapabilities _driverCapabilities;
 		private Process _phantomjs;
+
+		// This is just used to test the unit tests we write.
+		// When adding a new unit test :
+		// 1. Make sure they pass when setting this to FireFoxDriver
+		// 2. Make sure the test at first fails when changing this to ImmortalDriver, before implementing
+		public TestDrivers TestDriver
+		{
+			//get { return TestDrivers.ImmortalDriver; }
+			get { return TestDrivers.FireFoxDriver; }
+		}
 
 		public string PhantomJsExe
 		{
@@ -35,6 +46,12 @@ namespace ImmortalDriver
 
 		public IWebDriver StartDriver()
 		{
+			if (TestDriver == TestDrivers.FireFoxDriver)
+			{
+				_immortalDriver = CreateFireFoxDriver();
+				return _immortalDriver;
+			}
+
 			// open phantomJS
 			_phantomjs = new Process {
 				StartInfo = {
@@ -65,8 +82,25 @@ namespace ImmortalDriver
 
 		public void CloseDriver()
 		{
+			if (TestDriver == TestDrivers.FireFoxDriver)
+			{
+				_immortalDriver.Close();
+				_immortalDriver.Dispose();
+				return;
+			}
+
 			_phantomjs.CloseMainWindow();
 			_phantomjs.Dispose();
+		}
+
+		private IWebDriver CreateFireFoxDriver()
+		{
+			var fireFoxBinary = new FirefoxBinary(ConfigurationManager.AppSettings["firefox-binary"]);
+			var fireFoxProfile = new FirefoxProfile(ConfigurationManager.AppSettings["firefox-profile"]);
+			
+			var fireFoxDriver = new FirefoxDriver(fireFoxBinary, fireFoxProfile);
+
+			return fireFoxDriver;
 		}
 	}
 }
