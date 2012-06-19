@@ -13,7 +13,7 @@ namespace ImmortalDriver.ImmortalDriverTests
 		private ImmortalWebDriver _immortalDriver;
 		private IWebDriver _webDriver;
 
-		private const string url = "http://www.gooogle.com";
+		private const string Url = "http://www.gooogle.com";
 
 		// /session	- requests to start a new session
 		// /session/:sessionId - retrieves the sessions browser capailities
@@ -27,7 +27,7 @@ namespace ImmortalDriver.ImmortalDriverTests
 		[SetUp]
 		public void SetUp()
 		{
-			_webDriver.Navigate().GoToUrl(url);
+			_webDriver.Navigate().GoToUrl(Url);
 		}
 
 		// DELETE /session/:sessionId - closes the session

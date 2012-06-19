@@ -14,7 +14,7 @@ namespace ImmortalDriver
 	{
 		private IWebDriver _immortalDriver;
 		private ICapabilities _driverCapabilities;
-		private Process phantomjs;
+		private Process _phantomjs;
 
 		public string PhantomJsExe
 		{
@@ -36,13 +36,15 @@ namespace ImmortalDriver
 		public IWebDriver StartDriver()
 		{
 			// open phantomJS
-			phantomjs = new Process();
-			phantomjs.StartInfo.FileName = PhantomJsExe;
-			phantomjs.StartInfo.Arguments = string.Format("{0} {1} {2}",
-				ImmortalServerScript, CasperJsLibrary, ImmortalServerPort);
+			_phantomjs = new Process {
+				StartInfo = {
+					FileName = PhantomJsExe,
+			        Arguments = string.Format("{0} {1} {2}", ImmortalServerScript, CasperJsLibrary, ImmortalServerPort)
+				}
+			};
 			//browser.StartInfo.UseShellExecute = false;
 			//browser.StartInfo.RedirectStandardOutput = true;
-			phantomjs.Start();
+			_phantomjs.Start();
 
 			// Setup webdriver
 			_driverCapabilities = new DesiredCapabilities();
@@ -54,7 +56,7 @@ namespace ImmortalDriver
 			catch
 			{
 				//Console.WriteLine("Error : " + browser.StandardOutput.ReadToEnd());
-				phantomjs.Close();
+				_phantomjs.Close();
 				throw;
 			}
 
@@ -63,8 +65,8 @@ namespace ImmortalDriver
 
 		public void CloseDriver()
 		{
-			phantomjs.CloseMainWindow();
-			phantomjs.Dispose();
+			_phantomjs.CloseMainWindow();
+			_phantomjs.Dispose();
 		}
 	}
 }
