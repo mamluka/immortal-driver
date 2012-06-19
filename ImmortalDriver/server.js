@@ -30,7 +30,7 @@ else {
 	var serverRunning = server.listen(__serverPort, immortalServer.serverRequestHandler);
 	
 	if (!serverRunning) {
-		casper.echo('could not listen on port ' + __sertverPort, 'ERROR');
+		casper.echo('could not listen on port ' + __serverPort, 'ERROR');
 		casper.echo('closing phantomjs', 'INFO');
 		phantom.exit();
 	}
