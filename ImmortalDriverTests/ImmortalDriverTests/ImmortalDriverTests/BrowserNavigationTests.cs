@@ -13,12 +13,17 @@ namespace ImmortalDriver.ImmortalDriverTests
 	[TestFixture]
 	public class BrowserNavigationTests : TestBase
 	{
+		[SetUp]
+		public void SetUp()
+		{
+			WebDriver.Navigate().GoToUrl(TestSiteUrl);			
+		}
+
 		// POST /session/:sessionId/:url - navigate to a certain url
 		// GET /session/:sessionId/:url - retrieve the current url
 		[Test]
 		public void NavigateToUrl_RetrieveCorrectUrl()
 		{
-			WebDriver.Navigate().GoToUrl(TestSiteUrl);
 			Assert.That(WebDriver.Url, Is.StringStarting(TestSiteUrl));
 		}
 
@@ -26,7 +31,6 @@ namespace ImmortalDriver.ImmortalDriverTests
 		[Test]
 		public void NavigateBack_RetrievePreviousPage()
 		{
-			WebDriver.Navigate().GoToUrl(TestSiteUrl);
 			WebDriver.Navigate().GoToUrl(TestSiteUrl + "/Home/About");
 			WebDriver.Navigate().Back();
 			Assert.That(WebDriver.Url, Is.StringContaining(TestSiteUrl));
@@ -37,7 +41,6 @@ namespace ImmortalDriver.ImmortalDriverTests
 		[Test]
 		public void NavigateForward_NavigatesForward()
 		{
-			WebDriver.Navigate().GoToUrl(TestSiteUrl);
 			WebDriver.Navigate().GoToUrl(TestSiteUrl + "/Home/About");
 			WebDriver.Navigate().Back();
 			WebDriver.Navigate().Forward();
@@ -48,7 +51,6 @@ namespace ImmortalDriver.ImmortalDriverTests
 		[Test]
 		public void RefreshPage_PageWasRefreshed()
 		{
-			WebDriver.Navigate().GoToUrl(TestSiteUrl);
 			var currentTime = WebDriver.Title;
 			WebDriver.Navigate().Refresh();
 			var newTime = WebDriver.Title;

@@ -56,8 +56,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DevelopmentServer.cs" />
+    <Compile Include="ImmortalDriverTests\AlertTests.cs" />
+    <Compile Include="ImmortalDriverTests\BrowserActionsTests.cs" />
+    <Compile Include="ImmortalDriverTests\CookieTests.cs" />
+    <Compile Include="ImmortalDriverTests\ElementTests.cs" />
     <Compile Include="ImmortalDriverTests\FindElementsTests.cs" />
+    <Compile Include="ImmortalDriverTests\ImeTests.cs" />
     <Compile Include="ImmortalDriverTests\TestBase.cs" />
+    <Compile Include="ImmortalDriverTests\TimeoutTests.cs" />
     <Compile Include="ImmortalWebDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ImmortalDriverTests\BrowserNavigationTests.cs" />

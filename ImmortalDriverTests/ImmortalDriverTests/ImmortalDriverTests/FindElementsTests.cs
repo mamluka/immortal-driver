@@ -8,77 +8,58 @@ namespace ImmortalDriver.ImmortalDriverTests
 	/// POST /session/:sessionId/element
 	/// POST /session/:sessionId/elements
 	/// </summary>
-	public class FindElementsTests
+	[TestFixture]
+	public class FindElementsTests : TestBase
 	{
-		private ImmortalWebDriver _immortalDriver;
-		private IWebDriver _webDriver;
-
-		private const string Url = "http://www.gooogle.com";
-
-		// /session	- requests to start a new session
-		// /session/:sessionId - retrieves the sessions browser capailities
-		[TestFixtureSetUp]
-		public void TestFixtureSetUp()
-		{
-			_immortalDriver = new ImmortalWebDriver();
-			_webDriver = _immortalDriver.StartDriver();
-		}
-
 		[SetUp]
 		public void SetUp()
 		{
-			_webDriver.Navigate().GoToUrl(Url);
-		}
-
-		// DELETE /session/:sessionId - closes the session
-		[TestFixtureTearDown]
-		public void TestFixtureTearDown()
-		{
-			_immortalDriver.CloseDriver();
+			WebDriver.Navigate().GoToUrl(TestSiteUrl);			
 		}
 
 		// POST /session/:sessionId/element - get a specific element
 		[Test]
 		public void GetElementOnPageByCssSelector_ReturnsTheRequestedElement()
 		{
-			var element = _webDriver.FindElement(By.CssSelector("body div#main div#hplogo"));
+			var element = WebDriver.FindElement(By.CssSelector("body div#main h2"));
 			Assert.That(element.Displayed, Is.True);
 		}
 		[Test]
 		public void GetElementOnPageByClassName_ReturnsTheRequestedElement()
 		{
-			var element = _webDriver.FindElement(By.ClassName("gbqfba"));
+			var element = WebDriver.FindElement(By.ClassName("current-time"));
 			Assert.That(element.Displayed, Is.True);
 		}
 		[Test]
 		public void GetElementOnPageById_ReturnsTheRequestedElement()
 		{
-			var element = _webDriver.FindElement(By.Id("gbqfba"));
+			var element = WebDriver.FindElement(By.Id("main"));
 			Assert.That(element.Displayed, Is.True);
 		}
 		[Test]
 		public void GetElementOnPageByName_ReturnsTheRequestedElement()
 		{
-			var element = _webDriver.FindElement(By.Name("btnK"));
+			var element = WebDriver.FindElement(By.Name("text-box-a"));
 			Assert.That(element.Displayed, Is.True);
 		}
 		[Test]
 		public void GetElementOnPageByLinkText_ReturnsTheRequestedElement()
 		{
-			var element = _webDriver.FindElement(By.LinkText("About Google"));
-			Assert.That(element.Text, Is.EqualTo("About Google"));
+			var linkText = "http://asp.net/mvc";
+			var element = WebDriver.FindElement(By.LinkText(linkText));
+			Assert.That(element.Text, Is.EqualTo(linkText));
 		}
 		[Test]
 		public void GetElementOnPageByPartialLinkText_ReturnsTheRequestedElement()
 		{
-			var element = _webDriver.FindElement(By.PartialLinkText("About "));
-			Assert.That(element.Text, Is.EqualTo("About Google"));
+			var element = WebDriver.FindElement(By.PartialLinkText("Log "));
+			Assert.That(element.Text, Is.EqualTo("Log On"));
 		}
 		[Test]
 		public void GetElementOnPageByTagName_ReturnsTheRequestedElement()
 		{
 			// TODO: not sure about this test...
-			//var element = _webDriver.FindElement(By.TagName(""))
+			//var element = WebDriver.FindElement(By.TagName(""))
 			Assert.Fail("Test not implemented yet...");
 		}
 		[Test]
@@ -92,14 +73,14 @@ namespace ImmortalDriver.ImmortalDriverTests
 		[Test]
 		public void GetMultipleElementsFromPageByCssSelector_ReturnsListOfElements()
 		{
-			var elements = _webDriver.FindElements(By.CssSelector("div#main div"));
-			Assert.That(elements, Is.Not.Empty);
+			var elements = WebDriver.FindElements(By.CssSelector("div#header div"));
+			Assert.That(elements.Count, Is.GreaterThan(1));
 		}
 		[Test]
 		public void GetMultipleElementsFromPageByClassName_ReturnsListOfElements()
 		{
-			var elements = _webDriver.FindElements(By.ClassName("gbqfba"));
-			Assert.That(elements, Is.Not.Empty);
+			var elements = WebDriver.FindElements(By.ClassName("standard-input"));
+			Assert.That(elements.Count, Is.GreaterThan(1));
 		}
 		[Test]
 		public void GetMultipleElementsFromPageById_ReturnsListOfElements()

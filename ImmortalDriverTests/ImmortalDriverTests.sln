@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImmortalDriverTests", "ImmortalDriverTests\ImmortalDriverTests.csproj", "{9F23930D-1136-4309-9E89-5BE5A268BAE2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C4AFB87F-74BF-45B5-B7C0-D9EFEF00D1EB} = {C4AFB87F-74BF-45B5-B7C0-D9EFEF00D1EB}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImmortalTestingSite", "ImmortalTestingSite\ImmortalTestingSite.csproj", "{C4AFB87F-74BF-45B5-B7C0-D9EFEF00D1EB}"
 EndProject
