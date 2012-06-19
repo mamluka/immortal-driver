@@ -63,7 +63,7 @@ namespace ImmortalDriver
 
 		public void CloseDriver()
 		{
-			phantomjs.Close();
+			phantomjs.CloseMainWindow();
 			phantomjs.Dispose();
 		}
 	}
