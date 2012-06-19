@@ -55,7 +55,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DevelopmentServer.cs" />
     <Compile Include="ImmortalDriverTests\FindElementsTests.cs" />
+    <Compile Include="ImmortalDriverTests\TestBase.cs" />
     <Compile Include="ImmortalWebDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ImmortalDriverTests\BrowserNavigationTests.cs" />
