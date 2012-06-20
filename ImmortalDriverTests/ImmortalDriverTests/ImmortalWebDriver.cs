@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Diagnostics;
+using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
@@ -23,8 +24,8 @@ namespace ImmortalDriver
 		// 2. Make sure the test at first fails when changing this to ImmortalDriver, before implementing
 		public TestDrivers TestDriver
 		{
-			//get { return TestDrivers.ImmortalDriver; }
-			get { return TestDrivers.FireFoxDriver; }
+			get { return TestDrivers.ImmortalDriver; }
+			//get { return TestDrivers.FireFoxDriver; }
 		}
 
 		public string PhantomJsExe
@@ -59,9 +60,11 @@ namespace ImmortalDriver
 			        Arguments = string.Format("{0} {1} {2}", ImmortalServerScript, CasperJsLibrary, ImmortalServerPort)
 				}
 			};
-			//browser.StartInfo.UseShellExecute = false;
-			//browser.StartInfo.RedirectStandardOutput = true;
+			_phantomjs.StartInfo.UseShellExecute = false;
+			_phantomjs.StartInfo.RedirectStandardOutput = true;
 			_phantomjs.Start();
+
+			Thread.Sleep(6000); // TODO: find a way around this
 
 			// Setup webdriver
 			_driverCapabilities = new DesiredCapabilities();
@@ -72,7 +75,7 @@ namespace ImmortalDriver
 			}
 			catch
 			{
-				//Console.WriteLine("Error : " + browser.StandardOutput.ReadToEnd());
+				//Console.WriteLine("Error : " + _phantomjs.StandardOutput.ReadToEnd());
 				_phantomjs.Close();
 				throw;
 			}
@@ -89,6 +92,7 @@ namespace ImmortalDriver
 				return;
 			}
 
+			Console.WriteLine(_phantomjs.StandardOutput.ReadToEnd());
 			_phantomjs.CloseMainWindow();
 			_phantomjs.Dispose();
 		}
