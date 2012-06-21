@@ -14,7 +14,6 @@ immortalServer.sessionManager = (function() {
 		_sessions.push(newSession);
 		_currentSession = _sessionCounter;
 		_sessionCounter++;
-		casper.log('done creating session');
 	};
 
 	var _deleteSession = function(sessionId) {
@@ -66,7 +65,7 @@ immortalServer.sessionManager = (function() {
 		createNewSession: _createNewSession,
 		deleteSession: _deleteSession,
 		setSession: _setSession,
-		currentSession: _sessions[_currentSession],
+		getCurrentSession: function() { return _sessions[_currentSession]; },
 		defaultCapabilities: _defaultCapabilities
 	};
 

@@ -8,11 +8,11 @@ immortalServer.serverRequestHandler = function(request, response) {
 	var requestedUrl = request.url;
 	var method = request.method;
 	var splitUrl = requestedUrl.substring(1).split('/');
+	var POST = (typeof (request.post) !== 'undefined') ? JSON.parse(request.post) : null;
 
 	if (splitUrl.length === 1) { // /session, /sessions, /status
 		if (splitUrl[0] === 'session' && method === 'POST') { // request to start a new session
 			casper.log('got session request');
-			casper.log(typeof immortalServer.sessionManager);
 			immortalServer.sessionManager.createNewSession();
 			response.statusCode = 303;
 			immortalServer.respond(response);
@@ -36,20 +36,26 @@ immortalServer.serverRequestHandler = function(request, response) {
 			}
 		}
 	}
-	else if (splitUrl[0] === 'session' && typeof (splitUrl[1]) === 'number') {
+	else if (splitUrl[0] === 'session') {
 
-		immortalServer.sessionManager.setSession(splitUrl[1]);
+		var requestedSessionId = parseInt(splitUrl[1]);
+		// TODO: check that requestedSessionId is really a number - if not then throw some error!
+		immortalServer.sessionManager.setSession(requestedSessionId);
+
+		casper.log('session request received.');
+		casper.log('splitUrl[2] = ' + splitUrl[2] + '; method = ' + method);
 
 		if (splitUrl[2] === 'url' && method === 'GET') { // get page title
 			var pageTitle;
-			pageTitle = immortalServer.sessionManager.currentSession.evaluate(function() {
-				return document.title;
+			pageTitle = immortalServer.sessionManager.getCurrentSession().evaluate(function() {
+				return document.location.href;
 			});
 			responseStatusCode = 200;
 			immortalServer.respond(response, pageTitle);
 		}
 		else if (splitUrl[2] === 'url' && method === 'POST') { // navigate to url
-			immortalServer.sessionManager.currentSession.open(request.post.url, function() {
+			casper.log('request to navigate to specific url', 'INFO');
+			immortalServer.sessionManager.getCurrentSession().open(POST.url, function() {
 				response.StatusCode = 200;
 				immortalServer.respond(response);
 			});
@@ -57,6 +63,14 @@ immortalServer.serverRequestHandler = function(request, response) {
 		else if (splitUrl[2] === 'element' || splitUrl === 'elements') {
 
 		}
+	}
+	else {
+		// TODO: this shouldn't happen- throw some error maybe
+		// TODO: dump all the data we have on the request so it will help us know what went wrong...
+		casper.log(splitUrl[0]);
+		casper.log(splitUrl[1] + ' typeof=' + typeof (splitUrl[1]));
+		casper.log(splitUrl[2]);
+		casper.log('length' + splitUrl.length);
 	}
 
 	// TODO: catch unsupported requests here

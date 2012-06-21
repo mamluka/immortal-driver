@@ -62,7 +62,10 @@ namespace ImmortalDriver
 			};
 			_phantomjs.StartInfo.UseShellExecute = false;
 			_phantomjs.StartInfo.RedirectStandardOutput = true;
+			_phantomjs.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+			_phantomjs.OutputDataReceived += (sender, args) => Console.WriteLine(args.Data);
 			_phantomjs.Start();
+			_phantomjs.BeginOutputReadLine();
 
 			Thread.Sleep(6000); // TODO: find a way around this
 
@@ -92,7 +95,7 @@ namespace ImmortalDriver
 				return;
 			}
 
-			Console.WriteLine(_phantomjs.StandardOutput.ReadToEnd());
+			//Console.WriteLine(_phantomjs.StandardOutput.ReadToEnd());
 			_phantomjs.CloseMainWindow();
 			_phantomjs.Dispose();
 		}

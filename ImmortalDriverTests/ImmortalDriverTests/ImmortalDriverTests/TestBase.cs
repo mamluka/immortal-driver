@@ -31,7 +31,7 @@ namespace ImmortalDriver.ImmortalDriverTests
 			WebDriver = _immortalDriver.StartDriver();
 
 			_devServer = new DevelopmentServer();
-		}
+		}	
 
 		[TestFixtureTearDown]
 		public void TestFixtureTearDown()
