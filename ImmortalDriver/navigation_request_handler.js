@@ -35,7 +35,6 @@ immortalServer.requestHandlers.push({
 			casper.echo(JSON.stringify(immortalServer.sessionManager.getCurrentSession()), 'DEBUG');
 			var a = immortalServer.sessionManager.getCurrentSession().evaluate(function() {
 				document.defaultView.history.go(-1);
-				return true;
 			});
 			casper.echo(a, 'DEBUG');
 			responseStatusCode = 200;
@@ -43,7 +42,7 @@ immortalServer.requestHandlers.push({
 		}
 		else if (splitUrl[2] == 'forward' && request.method == 'POST') {
 			immortalServer.sessionManager.getCurrentSession().evaluate(function() {
-				document.defaultView.next();
+				document.defaultView.history.go(1);
 			});
 			responseStatusCode = 200;
 			immortalServer.respond(response);
