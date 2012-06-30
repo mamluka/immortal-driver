@@ -25,7 +25,7 @@ else {
 	phantom.injectJs("server_request_handler.js");
 	phantom.injectJs("session_manager.js");
 	var __serverPort = system.args[2];
-	
+
 	// start the web server
 	var server = require('webserver').create();
 	var serverRunning = server.listen(__serverPort, immortalServer.serverRequestHandler);
