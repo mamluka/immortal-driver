@@ -47,6 +47,13 @@ immortalServer.requestHandlers.push({
 			responseStatusCode = 200;
 			immortalServer.respond(response);
 		}
+		else if (splitUrl[2] == 'refresh' && request.method == 'POST') {
+			immortalServer.sessionManager.getCurrentSession().evaluate(function() {
+				document.defaultView.history.go();
+			});
+			responseStatusCode = 200;
+			immortalServer.respond(response);
+		}
 	}
 
 });
