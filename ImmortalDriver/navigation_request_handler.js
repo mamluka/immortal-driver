@@ -21,7 +21,7 @@ immortalServer.requestHandlers.push({
 				var pageTitle = immortalServer.sessionManager.getCurrentSession().evaluate(function() {
 					return document.location.href;
 				});
-				responseStatusCode = 200;
+				response.StatusCode = 200;
 				immortalServer.respond(response, pageTitle);
 			},
 			POST: function(request, response) {
@@ -37,10 +37,10 @@ immortalServer.requestHandlers.push({
 			POST: function(request, response) {
 				immortalServer.sessionManager.setSession(parseInt(request.splitUrl[1]));
 				casper.echo(JSON.stringify(immortalServer.sessionManager.getCurrentSession()), 'DEBUG');
-				var a = immortalServer.sessionManager.getCurrentSession().evaluate(function() {
+				immortalServer.sessionManager.getCurrentSession().evaluate(function() {
 					document.defaultView.history.go(-1);
 				});
-				responseStatusCode = 200;
+				response.StatusCode = 200;
 				immortalServer.respond(response);
 			}
 		},
@@ -50,7 +50,7 @@ immortalServer.requestHandlers.push({
 				immortalServer.sessionManager.getCurrentSession().evaluate(function() {
 					document.defaultView.history.go(1);
 				});
-				responseStatusCode = 200;
+				response.StatusCode = 200;
 				immortalServer.respond(response);
 			}
 		},
@@ -60,7 +60,7 @@ immortalServer.requestHandlers.push({
 				immortalServer.sessionManager.getCurrentSession().evaluate(function() {
 					document.defaultView.history.go();
 				});
-				responseStatusCode = 200;
+				response.StatusCode = 200;
 				immortalServer.respond(response);
 			}
 		}
