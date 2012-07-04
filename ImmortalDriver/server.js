@@ -10,7 +10,6 @@ if (system.args.length !== 3) {
 }
 else {
 	// load casperjs
-	//phantom.casperPath = 'C:\\dev\\phantomjs\\casperjs';
 	phantom.casperPath = system.args[1];
 	phantom.injectJs(phantom.casperPath + '\\bin\\bootstrap.js');
 	var casper = require('casper').create({
@@ -22,7 +21,7 @@ else {
 	casper.echo('casper injected', 'INFO');
 	
 	// initializing web server
-	phantom.injectJs("server_request_handler.js");
+	phantom.injectJs("request_handler.js");
 	phantom.injectJs("session_manager.js");
 	var __serverPort = system.args[2];
 
