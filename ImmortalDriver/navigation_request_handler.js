@@ -40,7 +40,6 @@ immortalServer.requestHandlers.push({
 				var a = immortalServer.sessionManager.getCurrentSession().evaluate(function() {
 					document.defaultView.history.go(-1);
 				});
-				casper.echo(a, 'DEBUG');
 				responseStatusCode = 200;
 				immortalServer.respond(response);
 			}

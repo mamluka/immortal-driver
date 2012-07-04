@@ -23,7 +23,6 @@ immortalServer.serverRequestHandler = function(request, response) {
 	var requestHandled = false;
 
 	immortalServer.requestHandlers.forEach(function(handler, i) {
-		casper.echo(JSON.stringify(handler), 'INFO');
 		if (handler.canHandleRequest(request)) {
 			casper.echo('request being handled by ' + handler.name, 'DEBUG');
 			//handler.handleRequest(request, response);
