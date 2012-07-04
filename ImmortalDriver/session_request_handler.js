@@ -8,6 +8,33 @@ immortalServer.requestHandlers.push({
 			    request.splitUrl.length == 2;
 	},
 
+	getMethodName: function(request) {
+		return request.splitUrl[0];
+	},
+
+	methods: {
+		session: {
+			POST: function(request, response) {
+				immortalServer.sessionManager.createNewSession();
+				response.statusCode = 303;
+				immortalServer.respond(response);
+			},
+			GET: function(request, response) {
+				// TODO: return actual requested session data!
+				response.statusCode = 200;
+				immortalServer.respond(response, immortalServer.sessionManager.defaultCapabilities);
+			},
+			DELETE: function(request, response) {
+				// TODO: delete the requested session!
+				response.statusCode = 200;
+				immortalServer.respond(response, immortalServer.sessionManager.defaultCapabilities);
+			}
+		},
+		sessions: {
+			GET: function(request, response) { }
+		}
+	}/*,
+
 	handleRequest: function(request, response) {
 		var splitUrl = request.splitUrl;
 
@@ -29,6 +56,6 @@ immortalServer.requestHandlers.push({
 			}
 		}
 
-	}
+	}*/
 
 });

@@ -1,5 +1,7 @@
 var immortalServer = immortalServer || {};
 
+// TODO: change the method names here, to match our standard!
+
 // Singleton - There should only be one sessionManager instance
 immortalServer.sessionManager = (function() {
 
