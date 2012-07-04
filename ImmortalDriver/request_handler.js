@@ -17,6 +17,7 @@ immortalServer.serverRequestHandler = function(request, response) {
 	var splitUrl = requestedUrl.substring(1).split('/');
 	request.splitUrl = splitUrl;
 
+	// TODO: do we really need this ?..
 	var POST = (typeof (request.post) != 'undefined' && request.post != '') ? JSON.parse(request.post) : null;
 	request.POST = POST;
 
@@ -42,8 +43,6 @@ immortalServer.serverRequestHandler = function(request, response) {
 		casper.log('length' + splitUrl.length);
 	}
 
-
-	// TODO: catch unsupported requests here
 };
 
 immortalServer.respond = function(response, value, status, sessionId) {

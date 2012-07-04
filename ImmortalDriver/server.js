@@ -14,6 +14,7 @@ else {
 	phantom.injectJs(phantom.casperPath + '\\bin\\bootstrap.js');
 	var casper = require('casper').create({
 		// TODO: make these configurable somehow
+		// TODO: remove this - we don't really need casper for this WebDriver
 		verbose: true,
 		logLevel: "debug",
 		timeout: 30000
