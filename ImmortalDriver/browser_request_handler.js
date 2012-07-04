@@ -16,7 +16,14 @@ immortalServer.requestHandlers.push({
 	methods: {
 		source: {
 			GET: function(request, response) {
-				
+				immortalServer.sessionManager.setSession(parseInt(request.splitUrl[1]));
+				var pageSource = immortalServer.sessionManager.getCurrentSession().evaluate(function() {
+					// TODO: don't know if this is enough -
+					// TODO: we get the whole source without the '<!DOCTYPE html>' in the beginning
+					return document.getElementsByTagName('html')[0].outerHTML;
+				});
+				response.StatusCode = 200;
+				immortalServer.respond(response, pageSource);
 			}
 		},
 		title: {
@@ -25,7 +32,7 @@ immortalServer.requestHandlers.push({
 				var pageTitle = immortalServer.sessionManager.getCurrentSession().evaluate(function() {
 					return document.title;
 				});
-				responseStatusCode = 200;
+				response.StatusCode = 200;
 				immortalServer.respond(response, pageTitle);
 			}
 		}
