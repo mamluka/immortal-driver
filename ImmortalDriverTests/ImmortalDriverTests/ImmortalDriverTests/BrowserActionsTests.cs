@@ -19,8 +19,28 @@ namespace ImmortalDriver.ImmortalDriverTests
 	/// GET /session/:sessionId/title - get the title of the page
 	/// </summary>
 	[TestFixture]
-	public class BrowserActionsTests
+	public class BrowserActionsTests : TestBase
 	{
-		 
+		[SetUp]
+		public void SetUp()
+		{
+			WebDriver.Navigate().GoToUrl(TestSiteUrl);
+		}
+
+		// GET /session/:sessionId/title
+		[Test]
+		public void BrowseToPage_RequestForTitle_RetrieveTitle()
+		{
+			Assert.That(WebDriver.Title, Is.StringStarting("Home Page"));	
+		}
+
+		// GET /session/:sessionId/source
+		[Test]
+		public void BrowseToPage_RequestForSource_RetrievePageSource()
+		{
+			var pageSource = WebDriver.PageSource;
+			Assert.That(pageSource, Is.StringStarting("<!DOCTYPE html>"));
+			Assert.That(pageSource.Trim(), Is.StringEnding("</html>"));
+		}
 	}
 }
