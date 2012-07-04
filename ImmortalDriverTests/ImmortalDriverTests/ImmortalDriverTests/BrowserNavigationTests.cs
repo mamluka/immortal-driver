@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Threading;
+using NUnit.Framework;
 
 namespace ImmortalDriver.ImmortalDriverTests
 {
@@ -52,6 +53,7 @@ namespace ImmortalDriver.ImmortalDriverTests
 		public void RefreshPage_PageWasRefreshed()
 		{
 			var currentTime = WebDriver.Title;
+			Thread.Sleep(1000);
 			WebDriver.Navigate().Refresh();
 			var newTime = WebDriver.Title;
 			Assert.That(currentTime, Is.Not.EqualTo(newTime),
