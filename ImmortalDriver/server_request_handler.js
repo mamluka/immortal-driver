@@ -4,7 +4,7 @@ var immortalServer = immortalServer || {};
 immortalServer.requestHandlers = [];
 phantom.injectJs("session_request_handler.js");
 phantom.injectJs("navigation_request_handler.js");
-//phantom.injectJs("_request_handler.js");
+phantom.injectJs("browser_request_handler.js");
 //phantom.injectJs("_request_handler.js");
 
 immortalServer.serverRequestHandler = function(request, response) {
