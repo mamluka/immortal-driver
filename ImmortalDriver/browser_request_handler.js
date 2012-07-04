@@ -16,17 +16,17 @@ immortalServer.requestHandlers.push({
 	methods: {
 		source: {
 			GET: function(request, response) {
+				
+			}
+		},
+		title: {
+			GET: function(request, response) {
 				immortalServer.sessionManager.setSession(parseInt(request.splitUrl[1]));
 				var pageTitle = immortalServer.sessionManager.getCurrentSession().evaluate(function() {
 					return document.title;
 				});
 				responseStatusCode = 200;
 				immortalServer.respond(response, pageTitle);
-			}
-		},
-		title: {
-			GET: function(request, response) {
-
 			}
 		}
 	}
