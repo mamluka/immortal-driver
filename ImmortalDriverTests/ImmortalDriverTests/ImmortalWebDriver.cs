@@ -90,11 +90,6 @@ namespace ImmortalDriverTests
 			Thread.Sleep(6000); // TODO: find a way around this
 		}
 
-		public void QuitWebDriver()
-		{
-			_immortalDriver.Quit();
-		}
-
 		public void CloseDriver()
 		{
 			if (TestDriver == TestDrivers.FireFoxDriver)
