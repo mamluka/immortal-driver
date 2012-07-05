@@ -48,7 +48,7 @@ namespace ImmortalDriverTests.Tests
 
 		protected virtual void TearDown()
 		{
-			_immortalDriver.QuitWebDriver();
+			WebDriver.Close();
 		}
 	}
 }

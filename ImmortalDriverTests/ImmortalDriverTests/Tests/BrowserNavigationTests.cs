@@ -21,6 +21,12 @@ namespace ImmortalDriverTests.Tests
 			WebDriver.Navigate().GoToUrl(TestSiteUrl);			
 		}
 
+		[TearDown]
+		protected override void TearDown()
+		{
+			base.TearDown();
+		}
+
 		// POST /session/:sessionId/:url - navigate to a certain url
 		// GET /session/:sessionId/:url - retrieve the current url
 		[Test]
