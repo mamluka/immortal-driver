@@ -17,11 +17,12 @@ immortalServer.requestHandlers.push({
 		source: {
 			GET: function(request, response) {
 				immortalServer.sessionManager.setSession(parseInt(request.splitUrl[1]));
-				var pageSource = immortalServer.sessionManager.getCurrentSession().evaluate(function() {
-					// TODO: don't know if this is enough -
-					// TODO: we get the whole source without the '<!DOCTYPE html>' in the beginning
-					return document.getElementsByTagName('html')[0].outerHTML;
-				});
+				//var pageSource = immortalServer.sessionManager.getCurrentSession().evaluate(function() {
+				// TODO: don't know if this is enough -
+				// TODO: we get the whole source without the '<!DOCTYPE html>' in the beginning
+				//return document.getElementsByTagName('html')[0].outerHTML;
+				//});
+				var pageSource = immortalServer.sessionManager.getCurrentSession().content;
 				response.StatusCode = 200;
 				immortalServer.respond(response, pageSource);
 			}
