@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using NUnit.Framework;
 
-namespace ImmortalDriver.ImmortalDriverTests
+namespace ImmortalDriverTests.Tests
 {
 	/// <summary>
 	/// Tests for basic browser navigation

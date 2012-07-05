@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 
-namespace ImmortalDriver
+namespace ImmortalDriverTests
 {
 	/// <summary>
 	/// This is for setting up the ImmortalDriver.

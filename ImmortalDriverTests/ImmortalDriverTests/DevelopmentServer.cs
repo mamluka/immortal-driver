@@ -2,7 +2,7 @@
 using System.Configuration;
 using System.Diagnostics;
 
-namespace ImmortalDriver
+namespace ImmortalDriverTests
 {
 	public class DevelopmentServer : IDisposable
 	{

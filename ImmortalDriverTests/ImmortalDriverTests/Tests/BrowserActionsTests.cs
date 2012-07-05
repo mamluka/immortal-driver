@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace ImmortalDriver.ImmortalDriverTests
+namespace ImmortalDriverTests.Tests
 {
 	/// <summary>
 	/// Tests for some basic browser actions

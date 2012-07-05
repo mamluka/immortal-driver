@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace ImmortalDriver.ImmortalDriverTests
+namespace ImmortalDriverTests.Tests
 {
 	/// <summary>
 	/// This should be used as the base class for all system tests written here.

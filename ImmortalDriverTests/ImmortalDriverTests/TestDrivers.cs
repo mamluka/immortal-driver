@@ -1,4 +1,4 @@
-namespace ImmortalDriver
+namespace ImmortalDriverTests
 {
 	public enum TestDrivers
 	{
