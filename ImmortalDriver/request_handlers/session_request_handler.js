@@ -25,7 +25,7 @@ immortalServer.requestHandlers.push({
 				immortalServer.respond(response, immortalServer.sessionManager.defaultCapabilities);
 			},
 			DELETE: function(request, response) {
-				// TODO: delete the requested session!
+				immortalServer.sessionManager.deleteSession();
 				response.statusCode = 200;
 				immortalServer.respond(response, immortalServer.sessionManager.defaultCapabilities);
 			}

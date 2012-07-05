@@ -23,7 +23,7 @@ immortalServer.requestHandlers.push({
 				//return document.getElementsByTagName('html')[0].outerHTML;
 				//});
 				var pageSource = immortalServer.sessionManager.getCurrentSession().content;
-				response.StatusCode = 200;
+				response.statusCode = 200;
 				immortalServer.respond(response, pageSource);
 			}
 		},
@@ -33,7 +33,7 @@ immortalServer.requestHandlers.push({
 				var pageTitle = immortalServer.sessionManager.getCurrentSession().evaluate(function() {
 					return document.title;
 				});
-				response.StatusCode = 200;
+				response.statusCode = 200;
 				immortalServer.respond(response, pageTitle);
 			}
 		}

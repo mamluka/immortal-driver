@@ -45,13 +45,33 @@ namespace ImmortalDriver
 			get { return Int32.Parse(ConfigurationManager.AppSettings["immortal-server-port"]); }
 		}
 
-		public IWebDriver StartDriver()
+		public IWebDriver StartWebDriver()
 		{
-			if (TestDriver == TestDrivers.FireFoxDriver)
+			// Setup webdriver
+			_driverCapabilities = new DesiredCapabilities();
+			try
 			{
-				_immortalDriver = CreateFireFoxDriver();
-				return _immortalDriver;
+				var serverAddress = new Uri(string.Format("http://localhost:{0}", ImmortalServerPort));
+				_immortalDriver = new RemoteWebDriver(serverAddress, _driverCapabilities);
 			}
+			catch
+			{
+				//Console.WriteLine("Error : " + _phantomjs.StandardOutput.ReadToEnd());
+				_phantomjs.Close();
+				throw;
+			}
+
+			return _immortalDriver;
+		}
+
+		public void StartPhantomJs()
+		{
+			// TODO: return this somewhere! This is good for testing...
+			//if (TestDriver == TestDrivers.FireFoxDriver)
+			//{
+			//    _immortalDriver = CreateFireFoxDriver();
+			//    return _immortalDriver;
+			//}
 
 			// open phantomJS
 			_phantomjs = new Process {
@@ -68,22 +88,11 @@ namespace ImmortalDriver
 			_phantomjs.BeginOutputReadLine();
 
 			Thread.Sleep(6000); // TODO: find a way around this
+		}
 
-			// Setup webdriver
-			_driverCapabilities = new DesiredCapabilities();
-			try
-			{
-				var serverAddress = new Uri(string.Format("http://localhost:{0}", ImmortalServerPort));
-				_immortalDriver = new RemoteWebDriver(serverAddress, _driverCapabilities);
-			}
-			catch
-			{
-				//Console.WriteLine("Error : " + _phantomjs.StandardOutput.ReadToEnd());
-				_phantomjs.Close();
-				throw;
-			}
-
-			return _immortalDriver;
+		public void QuitWebDriver()
+		{
+			_immortalDriver.Quit();
 		}
 
 		public void CloseDriver()

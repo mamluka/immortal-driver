@@ -28,10 +28,10 @@ namespace ImmortalDriver.ImmortalDriverTests
 		public void TestFixtureSetUp()
 		{
 			_immortalDriver = new ImmortalWebDriver();
-			WebDriver = _immortalDriver.StartDriver();
+			_immortalDriver.StartPhantomJs();
 
 			_devServer = new DevelopmentServer();
-		}	
+		}
 
 		[TestFixtureTearDown]
 		public void TestFixtureTearDown()
@@ -39,6 +39,16 @@ namespace ImmortalDriver.ImmortalDriverTests
 			_immortalDriver.CloseDriver();
 
 			_devServer.Dispose();
+		}
+
+		protected virtual void SetUp()
+		{
+			WebDriver = _immortalDriver.StartWebDriver();
+		}
+
+		protected virtual void TearDown()
+		{
+			_immortalDriver.QuitWebDriver();
 		}
 	}
 }

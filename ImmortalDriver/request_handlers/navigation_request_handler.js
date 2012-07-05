@@ -21,14 +21,14 @@ immortalServer.requestHandlers.push({
 				var pageTitle = immortalServer.sessionManager.getCurrentSession().evaluate(function() {
 					return document.location.href;
 				});
-				response.StatusCode = 200;
+				response.statusCode = 200;
 				immortalServer.respond(response, pageTitle);
 			},
 			POST: function(request, response) {
 				immortalServer.sessionManager.setSession(parseInt(request.splitUrl[1]));
 				casper.log('request to navigate to specific url', 'INFO');
 				immortalServer.sessionManager.getCurrentSession().open(request.POST.url, function() {
-					response.StatusCode = 200;
+					response.statusCode = 200;
 					immortalServer.respond(response);
 				});
 			}
@@ -40,7 +40,7 @@ immortalServer.requestHandlers.push({
 				immortalServer.sessionManager.getCurrentSession().evaluate(function() {
 					document.defaultView.history.go(-1);
 				});
-				response.StatusCode = 200;
+				response.statusCode = 200;
 				immortalServer.respond(response);
 			}
 		},
@@ -50,7 +50,7 @@ immortalServer.requestHandlers.push({
 				immortalServer.sessionManager.getCurrentSession().evaluate(function() {
 					document.defaultView.history.go(1);
 				});
-				response.StatusCode = 200;
+				response.statusCode = 200;
 				immortalServer.respond(response);
 			}
 		},
@@ -60,7 +60,7 @@ immortalServer.requestHandlers.push({
 				immortalServer.sessionManager.getCurrentSession().evaluate(function() {
 					document.defaultView.history.go();
 				});
-				response.StatusCode = 200;
+				response.statusCode = 200;
 				immortalServer.respond(response);
 			}
 		}

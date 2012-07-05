@@ -27,6 +27,8 @@ immortalServer.sessionManager = (function() {
 		// TODO: throw some kind of error! This shouldn't happen
 			return;
 
+		_sessions[sessionId].release();
+		casper.echo('session ' + sessionId + ' was released');
 		_sessions[sessionId] = null;
 		if (_currentSession === sessionId)
 			_currentSession = null;

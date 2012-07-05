@@ -58,6 +58,5 @@ immortalServer.respond = function(response, value, status, sessionId) {
 	response.write(JSON.stringify(returnObject));
 	response.close();
 
-	casper.echo('');
 	casper.echo('response sent => ' + JSON.stringify(returnObject), 'DEBUG');
 };

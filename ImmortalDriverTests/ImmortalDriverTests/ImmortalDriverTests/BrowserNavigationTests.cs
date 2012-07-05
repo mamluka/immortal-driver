@@ -15,8 +15,9 @@ namespace ImmortalDriver.ImmortalDriverTests
 	public class BrowserNavigationTests : TestBase
 	{
 		[SetUp]
-		public void SetUp()
+		protected override void SetUp()
 		{
+			base.SetUp();
 			WebDriver.Navigate().GoToUrl(TestSiteUrl);			
 		}
 
