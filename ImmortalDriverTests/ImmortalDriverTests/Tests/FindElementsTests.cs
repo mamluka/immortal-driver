@@ -12,9 +12,16 @@ namespace ImmortalDriverTests.Tests
 	public class FindElementsTests : TestBase
 	{
 		[SetUp]
-		public void SetUp()
+		protected override void SetUp()
 		{
+			base.SetUp();
 			WebDriver.Navigate().GoToUrl(TestSiteUrl);			
+		}
+
+		[TearDown]
+		protected override void TearDown()
+		{
+			base.TearDown();
 		}
 
 		// POST /session/:sessionId/element - get a specific element

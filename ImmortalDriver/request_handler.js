@@ -4,7 +4,7 @@ immortalDriver.requestHandlers = [];
 phantom.injectJs("request_handlers\\session_request_handler.js");
 phantom.injectJs("request_handlers\\navigation_request_handler.js");
 phantom.injectJs("request_handlers\\browser_request_handler.js");
-
+phantom.injectJs("request_handlers\\element_request_handler.js");
 
 immortalDriver.serverRequestHandler = function(request, response) {
 	casper.echo('');
