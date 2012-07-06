@@ -29,7 +29,7 @@ else {
 
 	// start the web server
 	var server = require('webserver').create();
-	var serverRunning = server.listen(__serverPort, immortalServer.serverRequestHandler);
+	var serverRunning = server.listen(__serverPort, immortalDriver.serverRequestHandler);
 	
 	if (!serverRunning) {
 		casper.echo('could not listen on port ' + __serverPort, 'ERROR');
