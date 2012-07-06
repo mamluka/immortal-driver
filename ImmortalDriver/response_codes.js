@@ -1,6 +1,5 @@
-var immortalServer = immortalServer || {};
 
-immortalServer.ResponseCodes = {
+immortalDriver.ResponseCodes = {
 	SUCCESS = 0,
 	NO_SUCH_ELEMENT = 7,
 	NO_SUCH_FRAME = 8,

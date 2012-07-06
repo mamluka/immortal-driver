@@ -1,5 +1,5 @@
 
-immortalServer.requestHandlers.push({
+immortalDriver.requestHandlers.push({
 
 	name: 'browser_request_handler',
 
@@ -16,25 +16,25 @@ immortalServer.requestHandlers.push({
 	methods: {
 		source: {
 			GET: function(request, response) {
-				immortalServer.sessionManager.setSession(parseInt(request.splitUrl[1]));
-				//var pageSource = immortalServer.sessionManager.getCurrentSession().evaluate(function() {
+				immortalDriver.sessionManager.setSession(parseInt(request.splitUrl[1]));
+				//var pageSource = immortalDriver.sessionManager.getCurrentSession().evaluate(function() {
 				// TODO: don't know if this is enough -
 				// TODO: we get the whole source without the '<!DOCTYPE html>' in the beginning
 				//return document.getElementsByTagName('html')[0].outerHTML;
 				//});
-				var pageSource = immortalServer.sessionManager.getCurrentSession().content;
+				var pageSource = immortalDriver.sessionManager.getCurrentSession().content;
 				response.statusCode = 200;
-				immortalServer.respond(response, pageSource);
+				immortalDriver.respond(response, pageSource);
 			}
 		},
 		title: {
 			GET: function(request, response) {
-				immortalServer.sessionManager.setSession(parseInt(request.splitUrl[1]));
-				var pageTitle = immortalServer.sessionManager.getCurrentSession().evaluate(function() {
+				immortalDriver.sessionManager.setSession(parseInt(request.splitUrl[1]));
+				var pageTitle = immortalDriver.sessionManager.getCurrentSession().evaluate(function() {
 					return document.title;
 				});
 				response.statusCode = 200;
-				immortalServer.respond(response, pageTitle);
+				immortalDriver.respond(response, pageTitle);
 			}
 		}
 	}

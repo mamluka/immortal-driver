@@ -1,5 +1,5 @@
 
-immortalServer.requestHandlers.push({
+immortalDriver.requestHandlers.push({
 
 	name: 'session_request_handler',
 
@@ -15,19 +15,19 @@ immortalServer.requestHandlers.push({
 	methods: {
 		session: {
 			POST: function(request, response) {
-				immortalServer.sessionManager.createNewSession();
+				immortalDriver.sessionManager.createNewSession();
 				response.statusCode = 303;
-				immortalServer.respond(response);
+				immortalDriver.respond(response);
 			},
 			GET: function(request, response) {
 				// TODO: return actual requested session data!
 				response.statusCode = 200;
-				immortalServer.respond(response, immortalServer.sessionManager.defaultCapabilities);
+				immortalDriver.respond(response, immortalDriver.sessionManager.defaultCapabilities);
 			},
 			DELETE: function(request, response) {
-				immortalServer.sessionManager.deleteSession();
+				immortalDriver.sessionManager.deleteSession();
 				response.statusCode = 200;
-				immortalServer.respond(response, immortalServer.sessionManager.defaultCapabilities);
+				immortalDriver.respond(response, immortalDriver.sessionManager.defaultCapabilities);
 			}
 		},
 		sessions: {

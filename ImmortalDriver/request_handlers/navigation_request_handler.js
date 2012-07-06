@@ -1,5 +1,5 @@
 
-immortalServer.requestHandlers.push({
+immortalDriver.requestHandlers.push({
 
 	name: 'navigation_request_handler',
 
@@ -17,51 +17,51 @@ immortalServer.requestHandlers.push({
 	methods: {
 		url: {
 			GET: function(request, response) {
-				immortalServer.sessionManager.setSession(parseInt(request.splitUrl[1]));
-				var pageTitle = immortalServer.sessionManager.getCurrentSession().evaluate(function() {
+				immortalDriver.sessionManager.setSession(parseInt(request.splitUrl[1]));
+				var pageTitle = immortalDriver.sessionManager.getCurrentSession().evaluate(function() {
 					return document.location.href;
 				});
 				response.statusCode = 200;
-				immortalServer.respond(response, pageTitle);
+				immortalDriver.respond(response, pageTitle);
 			},
 			POST: function(request, response) {
-				immortalServer.sessionManager.setSession(parseInt(request.splitUrl[1]));
+				immortalDriver.sessionManager.setSession(parseInt(request.splitUrl[1]));
 				casper.log('request to navigate to specific url', 'INFO');
-				immortalServer.sessionManager.getCurrentSession().open(request.POST.url, function() {
+				immortalDriver.sessionManager.getCurrentSession().open(request.POST.url, function() {
 					response.statusCode = 200;
-					immortalServer.respond(response);
+					immortalDriver.respond(response);
 				});
 			}
 		},
 		back: {
 			POST: function(request, response) {
-				immortalServer.sessionManager.setSession(parseInt(request.splitUrl[1]));
-				casper.echo(JSON.stringify(immortalServer.sessionManager.getCurrentSession()), 'DEBUG');
-				immortalServer.sessionManager.getCurrentSession().evaluate(function() {
+				immortalDriver.sessionManager.setSession(parseInt(request.splitUrl[1]));
+				casper.echo(JSON.stringify(immortalDriver.sessionManager.getCurrentSession()), 'DEBUG');
+				immortalDriver.sessionManager.getCurrentSession().evaluate(function() {
 					document.defaultView.history.go(-1);
 				});
 				response.statusCode = 200;
-				immortalServer.respond(response);
+				immortalDriver.respond(response);
 			}
 		},
 		forward: {
 			POST: function(request, response) {
-				immortalServer.sessionManager.setSession(parseInt(request.splitUrl[1]));
-				immortalServer.sessionManager.getCurrentSession().evaluate(function() {
+				immortalDriver.sessionManager.setSession(parseInt(request.splitUrl[1]));
+				immortalDriver.sessionManager.getCurrentSession().evaluate(function() {
 					document.defaultView.history.go(1);
 				});
 				response.statusCode = 200;
-				immortalServer.respond(response);
+				immortalDriver.respond(response);
 			}
 		},
 		refresh: {
 			POST: function(request, response) {
-				immortalServer.sessionManager.setSession(parseInt(request.splitUrl[1]));
-				immortalServer.sessionManager.getCurrentSession().evaluate(function() {
+				immortalDriver.sessionManager.setSession(parseInt(request.splitUrl[1]));
+				immortalDriver.sessionManager.getCurrentSession().evaluate(function() {
 					document.defaultView.history.go();
 				});
 				response.statusCode = 200;
-				immortalServer.respond(response);
+				immortalDriver.respond(response);
 			}
 		}
 	}

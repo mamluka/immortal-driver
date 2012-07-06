@@ -1,6 +1,7 @@
 // You should be invoking phantomjs like this :
 // phantomjs <server_script> <casper_library> <server_port>
 
+var immortalDriver = {};
 var system = require('system');
 
 if (system.args.length !== 3) {

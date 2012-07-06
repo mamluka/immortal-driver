@@ -1,13 +1,12 @@
-var immortalServer = immortalServer || {};
 
 // add all the request handlers we have here
-immortalServer.requestHandlers = [];
+immortalDriver.requestHandlers = [];
 phantom.injectJs("request_handlers\\session_request_handler.js");
 phantom.injectJs("request_handlers\\navigation_request_handler.js");
 phantom.injectJs("request_handlers\\browser_request_handler.js");
 
 
-immortalServer.serverRequestHandler = function(request, response) {
+immortalDriver.serverRequestHandler = function(request, response) {
 	casper.echo('');
 	casper.echo('incoming request => ' + JSON.stringify(request), 'DEBUG');
 
@@ -23,7 +22,7 @@ immortalServer.serverRequestHandler = function(request, response) {
 
 	var requestHandled = false;
 
-	immortalServer.requestHandlers.forEach(function(handler, i) {
+	immortalDriver.requestHandlers.forEach(function(handler, i) {
 		if (handler.canHandleRequest(request)) {
 			casper.echo('request being handled by ' + handler.name, 'DEBUG');
 			//handler.handleRequest(request, response);
@@ -45,7 +44,7 @@ immortalServer.serverRequestHandler = function(request, response) {
 
 };
 
-immortalServer.respond = function(response, value, status, sessionId) {
+immortalDriver.respond = function(response, value, status, sessionId) {
 	response.setHeader("Cache", "no-cache");
 	response.setHeader("Content-Type", "application/json;charset=utf-8");
 

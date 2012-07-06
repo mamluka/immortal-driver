@@ -1,6 +1,5 @@
-var immortalServer = immortalServer || {};
 
-immortalServer.sessionManager = {
+immortalDriver.sessionManager = {
 
 	sessionCounter: 0,
 	currentSession: 0,
