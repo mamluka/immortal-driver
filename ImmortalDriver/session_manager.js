@@ -9,6 +9,7 @@ immortalDriver.sessionManager = {
 		casper.log('creating new session');
 		var newSession = require('webpage').create();
 		newSession.sessionId = this.sessionCounter;
+		// TODO: attach an 'elements repository' to the session object
 		this.sessions.push(newSession);
 		this.currentSession = this.sessionCounter;
 		this.sessionCounter++;
